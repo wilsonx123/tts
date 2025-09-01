@@ -26,7 +26,7 @@ const HTML_PAGE = `
             --background-color: #f8fafc;
             --surface-color: #ffffff;
             --text-primary: #0f172a;
-            --text-secondary: #475569;
+            --text-secondary: #475569;  
             --border-color: #e2e8f0;
             --border-focus: #3b82f6;
             --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -352,15 +352,18 @@ const HTML_PAGE = `
         }
         
         .fade-in {
-        .fade-in {
             animation: fadeIn 0.3s ease-out;
         }
         
-        /* 文件上传相关样式 */
+        /* 输入方式选择优化样式 */
         .input-method-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
+            gap: 4px;
+            margin-bottom: 20px;
+            background: var(--background-color);
+            padding: 4px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-color);
         }
         
         .tab-btn {
@@ -368,27 +371,44 @@ const HTML_PAGE = `
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 16px;
-            border: 2px solid var(--border-color);
-            background: var(--surface-color);
+            gap: 10px;
+            padding: 14px 20px;
+            border: none;
+            background: transparent;
             color: var(--text-secondary);
             border-radius: var(--radius-md);
-            font-size: 0.875rem;
+            font-size: 0.9rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
         
         .tab-btn:hover {
-            border-color: var(--primary-color);
             color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
         }
         
         .tab-btn.active {
-            border-color: var(--primary-color);
             background: var(--primary-color);
             color: white;
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
+        }
+        
+        .tab-btn .tab-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 0.875rem;
+        }
+        
+        .tab-btn:not(.active) .tab-icon {
+            background: rgba(100, 116, 139, 0.1);
         }
         
         .file-upload-container {
@@ -398,88 +418,153 @@ const HTML_PAGE = `
         .file-drop-zone {
             border: 2px dashed var(--border-color);
             border-radius: var(--radius-lg);
-            padding: 40px 20px;
+            padding: 48px 24px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.2s ease;
-            background: var(--background-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, var(--background-color) 0%, rgba(248, 250, 252, 0.8) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .file-drop-zone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .file-drop-zone:hover::before,
+        .file-drop-zone.dragover::before {
+            opacity: 1;
         }
         
         .file-drop-zone:hover,
         .file-drop-zone.dragover {
             border-color: var(--primary-color);
-            background: #f0f7ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
         }
         
         .file-drop-content {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            position: relative;
+            z-index: 1;
         }
         
         .file-drop-icon {
-            font-size: 2rem;
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+            border-radius: var(--radius-lg);
+            color: white;
             margin-bottom: 8px;
+            box-shadow: var(--shadow-md);
+            position: relative;
         }
         
         .file-drop-text {
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 1.1rem;
+            font-weight: 600;
             color: var(--text-primary);
             margin: 0;
+            line-height: 1.4;
         }
         
         .file-drop-hint {
             font-size: 0.875rem;
             color: var(--text-secondary);
             margin: 0;
+            padding: 8px 16px;
+            background: rgba(100, 116, 139, 0.1);
+            border-radius: var(--radius-sm);
         }
         
         .file-info {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px;
-            background: var(--background-color);
+            padding: 20px;
+            background: linear-gradient(135deg, var(--surface-color) 0%, rgba(248, 250, 252, 0.5) 100%);
             border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            margin-top: 12px;
+            border-radius: var(--radius-lg);
+            margin-top: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .file-info:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
         
         .file-details {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
+            flex: 1;
         }
         
         .file-name {
-            font-weight: 500;
+            font-weight: 600;
             color: var(--text-primary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .file-name::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border-radius: 3px;
+            opacity: 0.8;
+            flex-shrink: 0;
         }
         
         .file-size {
-            font-size: 0.875rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
+            background: rgba(100, 116, 139, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            width: fit-content;
         }
         
         .file-remove-btn {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
             border: none;
             background: var(--error-color);
             color: white;
-            border-radius: 50%;
+            border-radius: var(--radius-md);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
-            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
         }
         
         .file-remove-btn:hover {
             background: #b91c1c;
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         }
         
         @media (max-width: 768px) {
@@ -512,6 +597,42 @@ const HTML_PAGE = `
             
             .qr-code {
                 margin: 0 auto;
+            }
+            
+            .input-method-tabs {
+                gap: 2px;
+                padding: 2px;
+            }
+            
+            .tab-btn {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+                gap: 8px;
+            }
+            
+            .tab-btn .tab-icon {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .file-drop-zone {
+                padding: 32px 16px;
+            }
+            
+            .file-drop-icon {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .file-info {
+                padding: 16px;
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            
+            .file-remove-btn {
+                align-self: flex-end;
             }
         }
     </style>
@@ -549,11 +670,19 @@ const HTML_PAGE = `
                         <label class="form-label">选择输入方式</label>
                         <div class="input-method-tabs">
                             <button type="button" class="tab-btn active" id="textInputTab">
-                                <span>✏️</span>
+                                <span class="tab-icon">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                                    </svg>
+                                </span>
                                 <span>手动输入</span>
                             </button>
                             <button type="button" class="tab-btn" id="fileUploadTab">
-                                <span>📁</span>
+                                <span class="tab-icon">
+                                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                    </svg>
+                                </span>
                                 <span>上传文件</span>
                             </button>
                         </div>
@@ -571,7 +700,12 @@ const HTML_PAGE = `
                         <div class="file-upload-container">
                             <div class="file-drop-zone" id="fileDropZone">
                                 <div class="file-drop-content">
-                                    <span class="file-drop-icon">📄</span>
+                                    <div class="file-drop-icon">
+                                        <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2L13.09 8.26L19 7L17.74 13.09L24 12L17.74 10.91L19 5L13.09 6.26L12 0L10.91 6.26L5 5L6.26 10.91L0 12L6.26 13.09L5 19L10.91 17.74L12 24L13.09 17.74L19 19L17.74 13.09L24 12Z"/>
+                                            <path d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2M18 20H6V4H13V9H18V20Z"/>
+                                        </svg>
+                                    </div>
                                     <p class="file-drop-text">拖拽txt文件到此处，或点击选择文件</p>
                                     <p class="file-drop-hint">支持txt格式，最大500KB</p>
                                 </div>
@@ -665,7 +799,8 @@ const HTML_PAGE = `
                 <div id="result" class="result-container">
                     <div id="loading" class="loading-container" style="display: none;">
                         <div class="loading-spinner"></div>
-                        <p class="loading-text">正在生成语音，请稍候...</p>
+                        <p class="loading-text" id="loadingText">正在生成语音，请稍候...</p>
+                        <div class="progress-info" id="progressInfo" style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);"></div>
                     </div>
                     
                     <div id="success" style="display: none;">
@@ -861,10 +996,26 @@ const HTML_PAGE = `
             
             try {
                 let response;
+                let textLength = 0;
+                
+                // 更新加载提示
+                const loadingText = document.getElementById('loadingText');
+                const progressInfo = document.getElementById('progressInfo');
                 
                 if (currentInputMethod === 'text') {
                     // 手动输入文本
                     const text = document.getElementById('text').value;
+                    textLength = text.length;
+                    
+                    // 根据文本长度显示不同的提示
+                    if (textLength > 3000) {
+                        loadingText.textContent = '正在处理长文本，请耐心等待...';
+                        progressInfo.textContent = '文本长度: ' + textLength + ' 字符，预计需要 ' + (Math.ceil(textLength / 1500) * 2) + ' 秒';
+                    } else {
+                        loadingText.textContent = '正在生成语音，请稍候...';
+                        progressInfo.textContent = '文本长度: ' + textLength + ' 字符';
+                    }
+                    
                     response = await fetch('/v1/audio/speech', {
                         method: 'POST',
                         headers: {
@@ -880,6 +1031,9 @@ const HTML_PAGE = `
                     });
                 } else {
                     // 文件上传
+                    loadingText.textContent = '正在处理上传的文件...';
+                    progressInfo.textContent = '文件: ' + selectedFile.name + ' (' + formatFileSize(selectedFile.size) + ')';
+                    
                     const formData = new FormData();
                     formData.append('file', selectedFile);
                     formData.append('voice', voice);
@@ -921,7 +1075,17 @@ const HTML_PAGE = `
             } catch (err) {
                 loading.style.display = 'none';
                 error.style.display = 'block';
-                error.textContent = '错误: ' + err.message;
+                
+                // 根据错误类型显示不同的提示
+                if (err.message.includes('Too many subrequests')) {
+                    error.textContent = '错误: 文本过长导致请求过多，请缩短文本内容或分段处理';
+                } else if (err.message.includes('频率限制') || err.message.includes('429')) {
+                    error.textContent = '错误: 请求过于频繁，请稍后再试';
+                } else if (err.message.includes('分块数量') && err.message.includes('超过限制')) {
+                    error.textContent = '错误: ' + err.message;
+                } else {
+                    error.textContent = '错误: ' + err.message;
+                }
             } finally {
                 generateBtn.disabled = false;
                 generateBtn.innerHTML = '<span>🎙️</span><span>开始生成语音</span>';
@@ -1028,60 +1192,147 @@ async function handleOptions(request) {
     });
 }
 
+// 添加延迟函数
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// 优化文本分块函数
+function optimizedTextSplit(text, maxChunkSize = 1500) {
+    const chunks = [];
+    const sentences = text.split(/[。！？\n]/);
+    let currentChunk = '';
+    
+    for (const sentence of sentences) {
+        const trimmedSentence = sentence.trim();
+        if (!trimmedSentence) continue;
+        
+        // 如果单个句子就超过最大长度，按字符分割
+        if (trimmedSentence.length > maxChunkSize) {
+            if (currentChunk) {
+                chunks.push(currentChunk.trim());
+                currentChunk = '';
+            }
+            
+            // 按字符分割长句子
+            for (let i = 0; i < trimmedSentence.length; i += maxChunkSize) {
+                chunks.push(trimmedSentence.slice(i, i + maxChunkSize));
+            }
+        } else if ((currentChunk + trimmedSentence).length > maxChunkSize) {
+            // 当前块加上新句子会超过限制，先保存当前块
+            if (currentChunk) {
+                chunks.push(currentChunk.trim());
+            }
+            currentChunk = trimmedSentence;
+        } else {
+            // 添加到当前块
+            currentChunk += (currentChunk ? '。' : '') + trimmedSentence;
+        }
+    }
+    
+    // 添加最后一个块
+    if (currentChunk.trim()) {
+        chunks.push(currentChunk.trim());
+    }
+    
+    return chunks.filter(chunk => chunk.length > 0);
+}
+
+// 批量处理音频块
+async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume, style, outputFormat, batchSize = 3, delayMs = 1000) {
+    const audioChunks = [];
+    
+    for (let i = 0; i < chunks.length; i += batchSize) {
+        const batch = chunks.slice(i, i + batchSize);
+        const batchPromises = batch.map(async (chunk, index) => {
+            try {
+                // 为每个请求添加小延迟，避免同时发送
+                if (index > 0) {
+                    await delay(index * 200);
+                }
+                return await getAudioChunk(chunk, voiceName, rate, pitch, volume, style, outputFormat);
+            } catch (error) {
+                console.error(`处理音频块失败 (批次 ${Math.floor(i/batchSize) + 1}, 块 ${index + 1}):`, error);
+                throw error;
+            }
+        });
+        
+        try {
+            const batchResults = await Promise.all(batchPromises);
+            audioChunks.push(...batchResults);
+            
+            // 批次间延迟
+            if (i + batchSize < chunks.length) {
+                await delay(delayMs);
+            }
+        } catch (error) {
+            console.error(`批次处理失败:`, error);
+            throw error;
+        }
+    }
+    
+    return audioChunks;
+}
+
 async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', pitch = '+0Hz', volume = '+0%', style = "general", outputFormat = "audio-24khz-48kbitrate-mono-mp3") {
     try {
-        const maxChunkSize = 2000;
-        const chunks = text.trim().split("\n");
-
-
-        // 获取每个分段的音频
-        //const audioChunks = await Promise.all(chunks.map(chunk => getAudioChunk(chunk, voiceName, rate, pitch, volume,style, outputFormat)));
-        let audioChunks = []
-        while (chunks.length > 0) {
-            try {
-                let audio_chunk = await getAudioChunk(chunks.shift(), voiceName, rate, pitch, volume, style, outputFormat)
-                audioChunks.push(audio_chunk)
-
-            } catch (e) {
-                return new Response(JSON.stringify({
-                    error: {
-                        message: String(e),
-                        type: "api_error",
-                        param: `${voiceName}, ${rate}, ${pitch}, ${volume},${style}, ${outputFormat}`,
-                        code: "edge_tts_error"
-                    }
-                }), {
-                    status: 500,
-                    headers: {
-                        "Content-Type": "application/json",
-                        ...makeCORSHeaders()
-                    }
-                });
-
-            }
+        // 文本预处理
+        const cleanText = text.trim();
+        if (!cleanText) {
+            throw new Error("文本内容为空");
+        }
+        
+        // 如果文本很短，直接处理
+        if (cleanText.length <= 1500) {
+            const audioBlob = await getAudioChunk(cleanText, voiceName, rate, pitch, volume, style, outputFormat);
+            return new Response(audioBlob, {
+                headers: {
+                    "Content-Type": "audio/mpeg",
+                    ...makeCORSHeaders()
+                }
+            });
         }
 
+        // 优化的文本分块
+        const chunks = optimizedTextSplit(cleanText, 1500);
+        
+        // 检查分块数量，防止超过CloudFlare限制
+        if (chunks.length > 40) {
+            throw new Error(`文本过长，分块数量(${chunks.length})超过限制。请缩短文本或分批处理。`);
+        }
+        
+        console.log(`文本已分为 ${chunks.length} 个块进行处理`);
+
+        // 批量处理音频块，控制并发数量和频率
+        const audioChunks = await processBatchedAudioChunks(
+            chunks, 
+            voiceName, 
+            rate, 
+            pitch, 
+            volume, 
+            style, 
+            outputFormat,
+            3,  // 每批处理3个
+            800 // 批次间延迟800ms
+        );
 
         // 将音频片段拼接起来
         const concatenatedAudio = new Blob(audioChunks, { type: 'audio/mpeg' });
-        const response = new Response(concatenatedAudio, {
+        return new Response(concatenatedAudio, {
             headers: {
                 "Content-Type": "audio/mpeg",
                 ...makeCORSHeaders()
             }
         });
 
-
-        return response;
-
     } catch (error) {
         console.error("语音合成失败:", error);
         return new Response(JSON.stringify({
             error: {
-                message: error,
+                message: error.message || String(error),
                 type: "api_error",
-                param: null,
-                code: "edge_tts_error " + voiceName
+                param: `${voiceName}, ${rate}, ${pitch}, ${volume}, ${style}, ${outputFormat}`,
+                code: "edge_tts_error"
             }
         }), {
             status: 500,
@@ -1095,35 +1346,88 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', 
 
 
 
-//获取单个音频数据
-async function getAudioChunk(text, voiceName, rate, pitch, volume, style, outputFormat = 'audio-24khz-48kbitrate-mono-mp3') {
-    const endpoint = await getEndpoint();
-    const url = `https://${endpoint.r}.tts.speech.microsoft.com/cognitiveservices/v1`;
-    let m = text.match(/\[(\d+)\]\s*?$/);
-    let slien = 0;
-    if (m && m.length == 2) {
-        slien = parseInt(m[1]);
-        text = text.replace(m[0], '')
+//获取单个音频数据（增强错误处理和重试机制）
+async function getAudioChunk(text, voiceName, rate, pitch, volume, style, outputFormat = 'audio-24khz-48kbitrate-mono-mp3', maxRetries = 3) {
+    const retryDelay = 500; // 重试延迟500ms
+    
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+            const endpoint = await getEndpoint();
+            const url = `https://${endpoint.r}.tts.speech.microsoft.com/cognitiveservices/v1`;
+            
+            // 处理文本中的延迟标记
+            let m = text.match(/\[(\d+)\]\s*?$/);
+            let slien = 0;
+            if (m && m.length == 2) {
+                slien = parseInt(m[1]);
+                text = text.replace(m[0], '');
+            }
+            
+            // 验证文本长度
+            if (!text.trim()) {
+                throw new Error("文本块为空");
+            }
+            
+            if (text.length > 2000) {
+                throw new Error(`文本块过长: ${text.length} 字符，最大支持2000字符`);
+            }
+            
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Authorization": endpoint.t,
+                    "Content-Type": "application/ssml+xml",
+                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0",
+                    "X-Microsoft-OutputFormat": outputFormat
+                },
+                body: getSsml(text, voiceName, rate, pitch, volume, style, slien)
+            });
 
+            if (!response.ok) {
+                const errorText = await response.text();
+                
+                // 根据错误类型决定是否重试
+                if (response.status === 429) {
+                    // 频率限制，需要重试
+                    if (attempt < maxRetries) {
+                        console.log(`频率限制，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                        await delay(retryDelay * (attempt + 1));
+                        continue;
+                    }
+                    throw new Error(`请求频率过高，已重试${maxRetries}次仍失败`);
+                } else if (response.status >= 500) {
+                    // 服务器错误，可以重试
+                    if (attempt < maxRetries) {
+                        console.log(`服务器错误，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                        await delay(retryDelay * (attempt + 1));
+                        continue;
+                    }
+                    throw new Error(`Edge TTS服务器错误: ${response.status} ${errorText}`);
+                } else {
+                    // 客户端错误，不重试
+                    throw new Error(`Edge TTS API错误: ${response.status} ${errorText}`);
+                }
+            }
+
+            return await response.blob();
+            
+        } catch (error) {
+            if (attempt === maxRetries) {
+                // 最后一次重试失败
+                throw new Error(`音频生成失败（已重试${maxRetries}次）: ${error.message}`);
+            }
+            
+            // 如果是网络错误或其他可重试错误
+            if (error.message.includes('fetch') || error.message.includes('network')) {
+                console.log(`网络错误，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                await delay(retryDelay * (attempt + 1));
+                continue;
+            }
+            
+            // 其他错误直接抛出
+            throw error;
+        }
     }
-    const response = await fetch(url, {
-        method: "POST",
-        headers: {
-            "Authorization": endpoint.t,
-            "Content-Type": "application/ssml+xml",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36 Edg/127.0.0.0",
-            "X-Microsoft-OutputFormat": outputFormat
-        },
-        body: getSsml(text, voiceName, rate, pitch, volume, style, slien)
-    });
-
-    if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`Edge TTS API error: ${response.status} ${errorText}`);
-    }
-
-    return response.blob();
-
 }
 
 function getSsml(text, voiceName, rate, pitch, volume, style, slien = 0) {
