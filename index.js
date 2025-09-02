@@ -12,9 +12,9 @@ const HTML_PAGE = `
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>一只会飞的旺旺 - 让文字开口说话的神器</title>
-    <meta name="description" content="声音魔法师，一键将文字转换为自然流畅的语音，支持20+种中文声音，免费在线使用，让你的内容更生动有趣！">
-    <meta name="keywords" content="文字转语音,AI语音合成,在线TTS,语音生成器,免费语音工具">
+    <title data-i18n="page.title">VoiceCraft - AI-Powered Voice Processing Platform</title>
+    <meta name="description" content="" data-i18n-content="page.description">
+    <meta name="keywords" content="" data-i18n-content="page.keywords">
     <style>
         :root {
             --primary-color: #2563eb;
@@ -572,6 +572,9 @@ const HTML_PAGE = `
             max-width: 900px;
             margin: 0 auto 30px;
             padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
         
         .mode-btn {
@@ -589,8 +592,8 @@ const HTML_PAGE = `
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            min-width: 200px;
-            margin: 0 10px;
+            flex: 1;
+            max-width: 250px;
         }
         
         .mode-btn:hover {
@@ -714,6 +717,74 @@ const HTML_PAGE = `
             min-width: 140px;
         }
         
+        /* 语言切换器样式 */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .language-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .language-btn:hover {
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 4px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            min-width: 120px;
+            display: none;
+        }
+        
+        .language-dropdown.show {
+            display: block;
+        }
+        
+        .language-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            transition: background-color 0.2s ease;
+        }
+        
+        .language-option:hover {
+            background: var(--background-color);
+            color: var(--text-primary);
+        }
+        
+        .language-option.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
@@ -786,11 +857,12 @@ const HTML_PAGE = `
             .mode-switcher {
                 padding: 0 16px;
                 margin-bottom: 20px;
+                flex-direction: column;
+                gap: 12px;
             }
             
             .mode-btn {
-                min-width: 160px;
-                margin: 0 5px;
+                max-width: none;
                 padding: 14px 20px;
                 font-size: 0.9rem;
                 gap: 8px;
@@ -822,26 +894,71 @@ const HTML_PAGE = `
     </style>
 </head>
 <body>
+    <!-- 语言切换器 -->
+    <div class="language-switcher">
+        <div class="language-btn" id="languageBtn">
+            <span id="currentLangFlag">🌐</span>
+            <span id="currentLangName" data-i18n="lang.current">English</span>
+            <svg width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+            </svg>
+        </div>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option" data-lang="en">
+                <span>🇺🇸</span>
+                <span data-i18n="lang.en">English</span>
+            </div>
+            <div class="language-option" data-lang="zh">
+                <span>🇨🇳</span>
+                <span data-i18n="lang.zh">中文</span>
+            </div>
+            <div class="language-option" data-lang="ja">
+                <span>🇯🇵</span>
+                <span data-i18n="lang.ja">日本語</span>
+            </div>
+            <div class="language-option" data-lang="ko">
+                <span>🇰🇷</span>
+                <span data-i18n="lang.ko">한국어</span>
+            </div>
+            <div class="language-option" data-lang="es">
+                <span>🇪🇸</span>
+                <span data-i18n="lang.es">Español</span>
+            </div>
+            <div class="language-option" data-lang="fr">
+                <span>🇫🇷</span>
+                <span data-i18n="lang.fr">Français</span>
+            </div>
+            <div class="language-option" data-lang="de">
+                <span>🇩🇪</span>
+                <span data-i18n="lang.de">Deutsch</span>
+            </div>
+            <div class="language-option" data-lang="ru">
+                <span>🇷🇺</span>
+                <span data-i18n="lang.ru">Русский</span>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
-            <h1>声音魔法师</h1>
-            <p class="subtitle">让文字开口说话的神器</p>
+            <h1 data-i18n="header.title">VoiceCraft</h1>
+            <p class="subtitle" data-i18n="header.subtitle">AI-Powered Voice Processing Platform</p>
             <div class="features">
                 <div class="feature-item">
                     <span class="feature-icon">✨</span>
-                    <span>20+种中文声音</span>
+                    <span data-i18n="header.feature1">20+ Voice Options</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">⚡</span>
-                    <span>秒速生成</span>
+                    <span data-i18n="header.feature2">Lightning Fast</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">🆓</span>
-                    <span>完全免费</span>
+                    <span data-i18n="header.feature3">Completely Free</span>
                 </div>
                 <div class="feature-item">
                     <span class="feature-icon">📱</span>
-                    <span>支持下载</span>
+                    <span data-i18n="header.feature4">Download Support</span>
                 </div>
             </div>
         </div>
@@ -854,7 +971,7 @@ const HTML_PAGE = `
                         <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/>
                     </svg>
                 </span>
-                <span>文字转语音</span>
+                <span data-i18n="mode.tts">Text to Speech</span>
             </button>
             <button type="button" class="mode-btn" id="transcriptionMode">
                 <span class="mode-icon">
@@ -868,7 +985,7 @@ const HTML_PAGE = `
                         <path d="M21 9v6"/>
                     </svg>
                 </span>
-                <span>语音转文字</span>
+                <span data-i18n="mode.transcription">Speech to Text</span>
             </button>
         </div>
         
@@ -1068,7 +1185,7 @@ const HTML_PAGE = `
                             <div class="token-option">
                                 <label class="token-label">
                                     <input type="radio" name="tokenOption" value="custom">
-                                    <span>使用自定义Token</span>
+                                    <span>使用硅基流动自定义Token</span>
                                 </label>
                             </div>
                         </div>
@@ -1146,14 +1263,279 @@ const HTML_PAGE = `
         let currentMode = 'tts'; // 'tts' or 'transcription'
         let selectedAudioFile = null;
         let transcriptionToken = null;
+        let currentLanguage = 'en'; // 默认语言
+
+        // 国际化翻译数据
+        const translations = {
+            en: {
+                'page.title': 'VoiceCraft - AI-Powered Voice Processing Platform',
+                'page.description': 'VoiceCraft is an AI-powered platform that converts text to speech and speech to text with 20+ voice options, lightning fast processing, completely free to use.',
+                'page.keywords': 'text to speech,AI voice synthesis,online TTS,voice generator,free voice tools,speech to text,voice transcription',
+                'lang.current': 'English',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'AI-Powered Voice Processing Platform',
+                'header.feature1': '20+ Voice Options',
+                'header.feature2': 'Lightning Fast',
+                'header.feature3': 'Completely Free',
+                'header.feature4': 'Download Support',
+                'mode.tts': 'Text to Speech',
+                'mode.transcription': 'Speech to Text'
+            },
+            zh: {
+                'page.title': 'VoiceCraft - AI驱动的语音处理平台',
+                'page.description': 'VoiceCraft是一个AI驱动的平台，支持文字转语音和语音转文字，拥有20+种语音选项，闪电般的处理速度，完全免费使用。',
+                'page.keywords': '文字转语音,AI语音合成,在线TTS,语音生成器,免费语音工具,语音转文字,语音转录',
+                'lang.current': '中文',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'AI驱动的语音处理平台',
+                'header.feature1': '20+种语音选项',
+                'header.feature2': '闪电般快速',
+                'header.feature3': '完全免费',
+                'header.feature4': '支持下载',
+                'mode.tts': '文字转语音',
+                'mode.transcription': '语音转文字'
+            },
+            ja: {
+                'page.title': 'VoiceCraft - AI音声処理プラットフォーム',
+                'page.description': 'VoiceCraftはAI駆動のプラットフォームで、テキスト読み上げと音声テキスト変換に対応。20以上の音声オプション、高速処理、完全無料でご利用いただけます。',
+                'page.keywords': 'テキスト読み上げ,AI音声合成,オンラインTTS,音声ジェネレーター,無料音声ツール,音声テキスト変換,音声転写',
+                'lang.current': '日本語',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'AI音声処理プラットフォーム',
+                'header.feature1': '20以上の音声オプション',
+                'header.feature2': '高速処理',
+                'header.feature3': '完全無料',
+                'header.feature4': 'ダウンロード対応',
+                'mode.tts': 'テキスト読み上げ',
+                'mode.transcription': '音声テキスト変換'
+            },
+            ko: {
+                'page.title': 'VoiceCraft - AI 음성 처리 플랫폼',
+                'page.description': 'VoiceCraft는 AI 기반 플랫폼으로 텍스트 음성 변환과 음성 텍스트 변환을 지원합니다. 20개 이상의 음성 옵션, 빠른 처리 속도, 완전 무료로 이용하실 수 있습니다.',
+                'page.keywords': '텍스트 음성 변환,AI 음성 합성,온라인 TTS,음성 생성기,무료 음성 도구,음성 텍스트 변환,음성 전사',
+                'lang.current': '한국어',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'AI 음성 처리 플랫폼',
+                'header.feature1': '20개 이상의 음성 옵션',
+                'header.feature2': '빠른 처리',
+                'header.feature3': '완전 무료',
+                'header.feature4': '다운로드 지원',
+                'mode.tts': '텍스트 음성 변환',
+                'mode.transcription': '음성 텍스트 변환'
+            },
+            es: {
+                'page.title': 'VoiceCraft - Plataforma de Procesamiento de Voz con IA',
+                'page.description': 'VoiceCraft es una plataforma impulsada por IA que convierte texto a voz y voz a texto con más de 20 opciones de voz, procesamiento ultrarrápido, completamente gratis.',
+                'page.keywords': 'texto a voz,síntesis de voz IA,TTS en línea,generador de voz,herramientas de voz gratis,voz a texto,transcripción de voz',
+                'lang.current': 'Español',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'Plataforma de Procesamiento de Voz con IA',
+                'header.feature1': 'Más de 20 Opciones de Voz',
+                'header.feature2': 'Ultrarrápido',
+                'header.feature3': 'Completamente Gratis',
+                'header.feature4': 'Soporte de Descarga',
+                'mode.tts': 'Texto a Voz',
+                'mode.transcription': 'Voz a Texto'
+            },
+            fr: {
+                'page.title': 'VoiceCraft - Plateforme de Traitement Vocal IA',
+                'page.description': 'VoiceCraft est une plateforme alimentée par IA qui convertit le texte en parole et la parole en texte avec plus de 20 options vocales, traitement ultra-rapide, entièrement gratuit.',
+                'page.keywords': 'texte vers parole,synthèse vocale IA,TTS en ligne,générateur vocal,outils vocaux gratuits,parole vers texte,transcription vocale',
+                'lang.current': 'Français',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'Plateforme de Traitement Vocal IA',
+                'header.feature1': 'Plus de 20 Options Vocales',
+                'header.feature2': 'Ultra-rapide',
+                'header.feature3': 'Entièrement Gratuit',
+                'header.feature4': 'Support de Téléchargement',
+                'mode.tts': 'Texte vers Parole',
+                'mode.transcription': 'Parole vers Texte'
+            },
+            de: {
+                'page.title': 'VoiceCraft - KI-gestützte Sprachverarbeitungsplattform',
+                'page.description': 'VoiceCraft ist eine KI-gestützte Plattform, die Text in Sprache und Sprache in Text umwandelt, mit über 20 Sprachoptionen, blitzschneller Verarbeitung, völlig kostenlos.',
+                'page.keywords': 'Text zu Sprache,KI-Sprachsynthese,Online-TTS,Sprachgenerator,kostenlose Sprachtools,Sprache zu Text,Sprachtranskription',
+                'lang.current': 'Deutsch',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'KI-gestützte Sprachverarbeitungsplattform',
+                'header.feature1': 'Über 20 Sprachoptionen',
+                'header.feature2': 'Blitzschnell',
+                'header.feature3': 'Völlig Kostenlos',
+                'header.feature4': 'Download-Unterstützung',
+                'mode.tts': 'Text zu Sprache',
+                'mode.transcription': 'Sprache zu Text'
+            },
+            ru: {
+                'page.title': 'VoiceCraft - ИИ-платформа обработки голоса',
+                'page.description': 'VoiceCraft - это платформа на базе ИИ, которая преобразует текст в речь и речь в текст с более чем 20 голосовыми опциями, молниеносной обработкой, совершенно бесплатно.',
+                'page.keywords': 'текст в речь,ИИ синтез речи,онлайн TTS,генератор голоса,бесплатные голосовые инструменты,речь в текст,транскрипция речи',
+                'lang.current': 'Русский',
+                'lang.en': 'English',
+                'lang.zh': '中文',
+                'lang.ja': '日本語',
+                'lang.ko': '한국어',
+                'lang.es': 'Español',
+                'lang.fr': 'Français',
+                'lang.de': 'Deutsch',
+                'lang.ru': 'Русский',
+                'header.title': 'VoiceCraft',
+                'header.subtitle': 'ИИ-платформа обработки голоса',
+                'header.feature1': 'Более 20 голосовых опций',
+                'header.feature2': 'Молниеносно',
+                'header.feature3': 'Совершенно Бесплатно',
+                'header.feature4': 'Поддержка Загрузки',
+                'mode.tts': 'Текст в Речь',
+                'mode.transcription': 'Речь в Текст'
+            }
+        };
+
+        // 国际化功能
+        function detectLanguage() {
+            // 检测浏览器语言
+            const browserLang = navigator.language || navigator.userLanguage;
+            const shortLang = browserLang.split('-')[0];
+            
+            // 检查是否支持该语言
+            if (translations[shortLang]) {
+                return shortLang;
+            }
+            
+            // 默认返回英语
+            return 'en';
+        }
+
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('voicecraft-language', lang);
+            
+            // 更新页面语言属性
+            document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+            
+            // 应用翻译
+            applyTranslations();
+            
+            // 更新语言切换器
+            updateLanguageSwitcher();
+        }
+
+        function applyTranslations() {
+            const langData = translations[currentLanguage];
+            
+            // 更新所有带有 data-i18n 属性的元素
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (langData[key]) {
+                    element.textContent = langData[key];
+                }
+            });
+            
+            // 更新 meta 标签
+            document.querySelectorAll('[data-i18n-content]').forEach(element => {
+                const key = element.getAttribute('data-i18n-content');
+                if (langData[key]) {
+                    element.setAttribute('content', langData[key]);
+                }
+            });
+            
+            // 更新页面标题
+            if (langData['page.title']) {
+                document.title = langData['page.title'];
+            }
+        }
+
+        function updateLanguageSwitcher() {
+            const langFlags = {
+                'en': '🇺🇸',
+                'zh': '🇨🇳',
+                'ja': '🇯🇵',
+                'ko': '🇰🇷',
+                'es': '🇪🇸',
+                'fr': '🇫🇷',
+                'de': '🇩🇪',
+                'ru': '🇷🇺'
+            };
+            
+            const langData = translations[currentLanguage];
+            document.getElementById('currentLangFlag').textContent = langFlags[currentLanguage];
+            document.getElementById('currentLangName').textContent = langData['lang.current'];
+            
+            // 更新选中状态
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.classList.remove('active');
+                if (option.getAttribute('data-lang') === currentLanguage) {
+                    option.classList.add('active');
+                }
+            });
+        }
 
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
+            // 初始化国际化
+            initializeI18n();
+            
+            // 初始化其他功能
             initializeInputMethodTabs();
             initializeFileUpload();
             initializeModeSwitcher();
             initializeAudioUpload();
             initializeTokenConfig();
+            initializeLanguageSwitcher();
         });
 
         // 初始化输入方式切换
@@ -1672,6 +2054,48 @@ const HTML_PAGE = `
             // 滚动到TTS区域
             document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
         });
+
+        // 初始化国际化
+        function initializeI18n() {
+            // 检查本地存储中的语言设置
+            const savedLang = localStorage.getItem('voicecraft-language');
+            
+            if (savedLang && translations[savedLang]) {
+                currentLanguage = savedLang;
+            } else {
+                // 自动检测浏览器语言
+                currentLanguage = detectLanguage();
+            }
+            
+            // 应用语言设置
+            setLanguage(currentLanguage);
+        }
+
+        // 初始化语言切换器
+        function initializeLanguageSwitcher() {
+            const languageBtn = document.getElementById('languageBtn');
+            const languageDropdown = document.getElementById('languageDropdown');
+
+            // 切换下拉菜单显示/隐藏
+            languageBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                languageDropdown.classList.toggle('show');
+            });
+
+            // 点击页面其他地方时隐藏下拉菜单
+            document.addEventListener('click', function() {
+                languageDropdown.classList.remove('show');
+            });
+
+            // 语言选择
+            document.querySelectorAll('.language-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const selectedLang = this.getAttribute('data-lang');
+                    setLanguage(selectedLang);
+                    languageDropdown.classList.remove('show');
+                });
+            });
+        }
     </script>
 </body>
 </html>
