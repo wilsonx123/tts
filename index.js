@@ -5,10 +5,10 @@ let tokenInfo = {
     expiredAt: null
 };
 
-// HTML 页面模板
+// HTML 頁面模板
 const HTML_PAGE = `
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -355,7 +355,7 @@ const HTML_PAGE = `
             animation: fadeIn 0.3s ease-out;
         }
         
-        /* 输入方式选择优化样式 */
+        /* 輸入方式選擇最佳化樣式 */
         .input-method-tabs {
             display: flex;
             gap: 4px;
@@ -567,7 +567,7 @@ const HTML_PAGE = `
             box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
         }
         
-        /* 主功能切换器样式 */
+        /* 主功能切換器樣式 */
         .mode-switcher {
             max-width: 900px;
             margin: 0 auto 30px;
@@ -619,7 +619,7 @@ const HTML_PAGE = `
             justify-content: center;
         }
         
-        /* 语音转录界面样式 */
+        /* 語音轉錄介面樣式 */
         .transcription-container {
             background: var(--surface-color);
             border-radius: var(--radius-xl);
@@ -717,7 +717,7 @@ const HTML_PAGE = `
             min-width: 140px;
         }
         
-        /* 语言切换器样式 */
+        /* 語言切換器樣式 */
         .language-switcher {
             position: fixed;
             top: 20px;
@@ -853,7 +853,7 @@ const HTML_PAGE = `
                 align-self: flex-end;
             }
             
-            /* 移动端模式切换器样式 */
+            /* 移動端模式切換器樣式 */
             .mode-switcher {
                 padding: 0 16px;
                 margin-bottom: 20px;
@@ -873,7 +873,7 @@ const HTML_PAGE = `
                 height: 20px;
             }
             
-            /* 移动端语音转录界面样式 */
+            /* 移動端語音轉錄介面樣式 */
             .audio-upload-zone {
                 padding: 32px 16px;
             }
@@ -894,7 +894,7 @@ const HTML_PAGE = `
     </style>
 </head>
 <body>
-    <!-- 语言切换器 -->
+    <!-- 語言切換器 -->
     <div class="language-switcher">
         <div class="language-btn" id="languageBtn">
             <span id="currentLangFlag">🌐</span>
@@ -909,7 +909,7 @@ const HTML_PAGE = `
                 <span data-i18n="lang.en">English</span>
             </div>
             <div class="language-option" data-lang="zh">
-                <span>🇨🇳</span>
+                <span>🇭🇰</span>
                 <span data-i18n="lang.zh">中文</span>
             </div>
             <div class="language-option" data-lang="ja">
@@ -963,7 +963,7 @@ const HTML_PAGE = `
             </div>
         </div>
         
-        <!-- 主功能切换器 -->
+        <!-- 主功能切換器 -->
         <div class="mode-switcher">
             <button type="button" class="mode-btn active" id="ttsMode">
                 <span class="mode-icon">
@@ -992,9 +992,9 @@ const HTML_PAGE = `
         <div class="main-content">
             <div class="form-container">
                 <form id="ttsForm">
-                    <!-- 输入方式选择 -->
+                    <!-- 輸入方式選擇 -->
                     <div class="form-group">
-                        <label class="form-label">选择输入方式</label>
+                        <label class="form-label">選擇輸入方式</label>
                         <div class="input-method-tabs">
                             <button type="button" class="tab-btn active" id="textInputTab">
                                 <span class="tab-icon">
@@ -1002,7 +1002,7 @@ const HTML_PAGE = `
                                         <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
                                     </svg>
                                 </span>
-                                <span>手动输入</span>
+                                <span>手動輸入</span>
                             </button>
                             <button type="button" class="tab-btn" id="fileUploadTab">
                                 <span class="tab-icon">
@@ -1010,20 +1010,20 @@ const HTML_PAGE = `
                                         <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
                                     </svg>
                                 </span>
-                                <span>上传文件</span>
+                                <span>上傳檔案</span>
                             </button>
                         </div>
                     </div>
 
-                    <!-- 手动输入区域 -->
+                    <!-- 手動輸入區域 -->
                     <div class="form-group" id="textInputArea">
-                        <label class="form-label" for="text">输入文本</label>
-                        <textarea class="form-textarea" id="text" placeholder="请输入要转换为语音的文本内容，支持中文、英文、数字等..." required></textarea>
+                        <label class="form-label" for="text">輸入文字</label>
+                        <textarea class="form-textarea" id="text" placeholder="請輸入要轉換為語音的文字內容，支援中文、英文、數字等..." required></textarea>
                     </div>
 
-                    <!-- 文件上传区域 -->
+                    <!-- 檔案上傳區域 -->
                     <div class="form-group" id="fileUploadArea" style="display: none;">
-                        <label class="form-label" for="fileInput">上传txt文件</label>
+                        <label class="form-label" for="fileInput">上傳txt檔案</label>
                         <div class="file-upload-container">
                             <div class="file-drop-zone" id="fileDropZone">
                                 <div class="file-drop-content">
@@ -1033,8 +1033,8 @@ const HTML_PAGE = `
                                             <path d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2M18 20H6V4H13V9H18V20Z"/>
                                         </svg>
                                     </div>
-                                    <p class="file-drop-text">拖拽txt文件到此处，或点击选择文件</p>
-                                    <p class="file-drop-hint">支持txt格式，最大500KB</p>
+                                    <p class="file-drop-text">拖拽txt檔案到此處，或點選選擇檔案</p>
+                                    <p class="file-drop-hint">支援txt格式，最大500KB</p>
                                 </div>
                                 <input type="file" id="fileInput" accept=".txt,text/plain" style="display: none;">
                             </div>
@@ -1050,83 +1050,89 @@ const HTML_PAGE = `
                 
                     <div class="controls-grid">
                         <div class="form-group">
-                            <label class="form-label" for="voice">语音选择</label>
+                            <label class="form-label" for="voice">語音選擇</label>
                             <select class="form-select" id="voice">
-                                <option value="zh-CN-XiaoxiaoNeural">晓晓 (女声·温柔)</option>
-                                <option value="zh-CN-YunxiNeural">云希 (男声·清朗)</option>
-                                <option value="zh-CN-YunyangNeural">云扬 (男声·阳光)</option>
-                                <option value="zh-CN-XiaoyiNeural">晓伊 (女声·甜美)</option>
-                                <option value="zh-CN-YunjianNeural">云健 (男声·稳重)</option>
-                                <option value="zh-CN-XiaochenNeural">晓辰 (女声·知性)</option>
-                                <option value="zh-CN-XiaohanNeural">晓涵 (女声·优雅)</option>
-                                <option value="zh-CN-XiaomengNeural">晓梦 (女声·梦幻)</option>
-                                <option value="zh-CN-XiaomoNeural">晓墨 (女声·文艺)</option>
-                                <option value="zh-CN-XiaoqiuNeural">晓秋 (女声·成熟)</option>
-                                <option value="zh-CN-XiaoruiNeural">晓睿 (女声·智慧)</option>
-                                <option value="zh-CN-XiaoshuangNeural">晓双 (女声·活泼)</option>
-                                <option value="zh-CN-XiaoxuanNeural">晓萱 (女声·清新)</option>
-                                <option value="zh-CN-XiaoyanNeural">晓颜 (女声·柔美)</option>
-                                <option value="zh-CN-XiaoyouNeural">晓悠 (女声·悠扬)</option>
-                                <option value="zh-CN-XiaozhenNeural">晓甄 (女声·端庄)</option>
-                                <option value="zh-CN-YunfengNeural">云枫 (男声·磁性)</option>
-                                <option value="zh-CN-YunhaoNeural">云皓 (男声·豪迈)</option>
-                                <option value="zh-CN-YunxiaNeural">云夏 (男声·热情)</option>
-                                <option value="zh-CN-YunyeNeural">云野 (男声·野性)</option>
-                                <option value="zh-CN-YunzeNeural">云泽 (男声·深沉)</option>
+                                <option value="zh-HK-HiuGaaiNeural">曉佳 (HK) (女聲·友好)</option>
+                                <option value="zh-HK-HiuMaanNeural">曉曼 (HK) (女聲·友好)</option>
+                                <option value="zh-HK-WanLungNeural">雲龍 (HK) (男聲·友好)</option>
+                                <option value="zh-TW-HsiaoChenNeural">曉晨 (TW) (女聲·友好)</option>
+                                <option value="zh-TW-HsiaoYuNeural">曉宇 (TW) (女聲·友好)</option>
+                                <option value="zh-TW-YunJheNeural">雲哲 (TW) (男聲·友好)</option>
+                                <option value="zh-CN-XiaoxiaoNeural">曉曉 (CN) (女聲·溫柔)</option>
+                                <option value="zh-CN-YunxiNeural">雲希 (CN) (男聲·清朗)</option>
+                                <option value="zh-CN-YunyangNeural">雲揚 (CN) (男聲·陽光)</option>
+                                <option value="zh-CN-XiaoyiNeural">曉伊 (CN) (女聲·甜美)</option>
+                                <option value="zh-CN-YunjianNeural">雲健 (CN) (男聲·穩重)</option>
+                                <option value="zh-CN-XiaochenNeural">曉辰 (CN) (女聲·知性)</option>
+                                <option value="zh-CN-XiaohanNeural">曉涵 (CN) (女聲·優雅)</option>
+                                <option value="zh-CN-XiaomengNeural">曉夢 (CN) (女聲·夢幻)</option>
+                                <option value="zh-CN-XiaomoNeural">曉墨 (CN) (女聲·文藝)</option>
+                                <option value="zh-CN-XiaoqiuNeural">曉秋 (CN) (女聲·成熟)</option>
+                                <option value="zh-CN-XiaoruiNeural">曉睿 (CN) (女聲·智慧)</option>
+                                <option value="zh-CN-XiaoshuangNeural">曉雙 (CN) (女聲·活潑)</option>
+                                <option value="zh-CN-XiaoxuanNeural">曉萱 (CN) (女聲·清新)</option>
+                                <option value="zh-CN-XiaoyanNeural">曉顏 (CN) (女聲·柔美)</option>
+                                <option value="zh-CN-XiaoyouNeural">曉悠 (CN) (女聲·悠揚)</option>
+                                <option value="zh-CN-XiaozhenNeural">曉甄 (CN) (女聲·端莊)</option>
+                                <option value="zh-CN-YunfengNeural">雲楓 (CN) (男聲·磁性)</option>
+                                <option value="zh-CN-YunhaoNeural">雲皓 (CN) (男聲·豪邁)</option>
+                                <option value="zh-CN-YunxiaNeural">雲夏 (CN) (男聲·熱情)</option>
+                                <option value="zh-CN-YunyeNeural">雲野 (CN) (男聲·野性)</option>
+                                <option value="zh-CN-YunzeNeural">雲澤 (CN) (男聲·深沉)</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label" for="speed">语速调节</label>
+                            <label class="form-label" for="speed">語速調節</label>
                             <select class="form-select" id="speed">
                                 <option value="0.5">🐌 很慢</option>
                                 <option value="0.75">🚶 慢速</option>
                                 <option value="1.0" selected>⚡ 正常</option>
                                 <option value="1.25">🏃 快速</option>
                                 <option value="1.5">🚀 很快</option>
-                                <option value="2.0">💨 极速</option>
+                                <option value="2.0">💨 極速</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label" for="pitch">音调高低</label>
+                            <label class="form-label" for="pitch">音調高低</label>
                             <select class="form-select" id="pitch">
                                 <option value="-50">📉 很低沉</option>
                                 <option value="-25">📊 低沉</option>
-                                <option value="0" selected>🎵 标准</option>
+                                <option value="0" selected>🎵 標準</option>
                                 <option value="25">📈 高亢</option>
                                 <option value="50">🎶 很高亢</option>
                             </select>
                         </div>
                         
                         <div class="form-group">
-                            <label class="form-label" for="style">语音风格</label>
+                            <label class="form-label" for="style">語音風格</label>
                             <select class="form-select" id="style">
-                                <option value="general" selected>🎭 通用风格</option>
-                                <option value="assistant">🤖 智能助手</option>
-                                <option value="chat">💬 聊天对话</option>
-                                <option value="customerservice">📞 客服专业</option>
-                                <option value="newscast">📺 新闻播报</option>
-                                <option value="affectionate">💕 亲切温暖</option>
-                                <option value="calm">😌 平静舒缓</option>
-                                <option value="cheerful">😊 愉快欢乐</option>
-                                <option value="gentle">🌸 温和柔美</option>
-                                <option value="lyrical">🎼 抒情诗意</option>
-                                <option value="serious">🎯 严肃正式</option>
+                                <option value="general" selected>🎭 通用風格</option>
+                                <option value="assistant">🤖 智慧助手</option>
+                                <option value="chat">💬 聊天對話</option>
+                                <option value="customerservice">📞 客服專業</option>
+                                <option value="newscast">📺 新聞播報</option>
+                                <option value="affectionate">💕 親切溫暖</option>
+                                <option value="calm">😌 平靜舒緩</option>
+                                <option value="cheerful">😊 愉快歡樂</option>
+                                <option value="gentle">🌸 溫和柔美</option>
+                                <option value="lyrical">🎼 抒情詩意</option>
+                                <option value="serious">🎯 嚴肅正式</option>
                             </select>
                         </div>
                     </div>
                     
                     <button type="submit" class="btn-primary" id="generateBtn">
                         <span>🎙️</span>
-                        <span>开始生成语音</span>
+                        <span>開始生成語音</span>
                     </button>
             </form>
             
                 <div id="result" class="result-container">
                     <div id="loading" class="loading-container" style="display: none;">
                         <div class="loading-spinner"></div>
-                        <p class="loading-text" id="loadingText">正在生成语音，请稍候...</p>
+                        <p class="loading-text" id="loadingText">正在生成語音，請稍候...</p>
                         <div class="progress-info" id="progressInfo" style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);"></div>
                     </div>
                     
@@ -1134,7 +1140,7 @@ const HTML_PAGE = `
                         <audio id="audioPlayer" class="audio-player" controls></audio>
                         <a id="downloadBtn" class="btn-secondary" download="speech.mp3">
                             <span>📥</span>
-                            <span>下载音频文件</span>
+                            <span>下載音訊檔案</span>
                         </a>
                     </div>
                     
@@ -1143,12 +1149,12 @@ const HTML_PAGE = `
             </div>
         </div>
         
-        <!-- 语音转录界面 -->
+        <!-- 語音轉錄介面 -->
         <div class="transcription-container" id="transcriptionContainer" style="display: none;">
             <div class="form-container">
                 <form id="transcriptionForm">
                     <div class="form-group">
-                        <label class="form-label">上传音频文件</label>
+                        <label class="form-label">上傳音訊檔案</label>
                         <div class="audio-upload-zone" id="audioDropZone">
                             <div class="file-drop-content">
                                 <div class="file-drop-icon">
@@ -1159,8 +1165,8 @@ const HTML_PAGE = `
                                         <path d="M9 15l3-3 3 3"/>
                                     </svg>
                                 </div>
-                                <p class="file-drop-text">拖拽音频文件到此处，或点击选择文件</p>
-                                <p class="file-drop-hint">支持mp3、wav、m4a、flac、aac、ogg、webm、amr、3gp格式，最大10MB</p>
+                                <p class="file-drop-text">拖拽音訊檔案到此處，或點選選擇檔案</p>
+                                <p class="file-drop-hint">支援mp3、wav、m4a、flac、aac、ogg、webm、amr、3gp格式，最大10MB</p>
                             </div>
                             <input type="file" id="audioFileInput" accept=".mp3,.wav,.m4a,.flac,.aac,.ogg,.webm,.amr,.3gp,audio/*" style="display: none;">
                         </div>
@@ -1179,50 +1185,50 @@ const HTML_PAGE = `
                             <div class="token-option">
                                 <label class="token-label">
                                     <input type="radio" name="tokenOption" value="default" checked>
-                                    <span>使用默认Token</span>
+                                    <span>使用預設Token</span>
                                 </label>
                             </div>
                             <div class="token-option">
                                 <label class="token-label">
                                     <input type="radio" name="tokenOption" value="custom">
-                                    <span>使用硅基流动自定义Token</span>
+                                    <span>使用矽基流動自定義Token</span>
                                 </label>
                             </div>
                         </div>
                         <input type="password" class="form-input" id="tokenInput" 
-                               placeholder="输入您的API Token（可选）" style="display: none;">
+                               placeholder="輸入您的API Token（可選）" style="display: none;">
                     </div>
 
                     <button type="submit" class="btn-primary" id="transcribeBtn">
                         <span>🎧</span>
-                        <span>开始语音转录</span>
+                        <span>開始語音轉錄</span>
                     </button>
                 </form>
 
                 <div id="transcriptionResult" class="result-container">
                     <div id="transcriptionLoading" class="loading-container" style="display: none;">
                         <div class="loading-spinner"></div>
-                        <p class="loading-text" id="transcriptionLoadingText">正在转录音频，请稍候...</p>
+                        <p class="loading-text" id="transcriptionLoadingText">正在轉錄音訊，請稍候...</p>
                         <div class="progress-info" id="transcriptionProgressInfo" style="margin-top: 12px; font-size: 0.875rem; color: var(--text-secondary);"></div>
                     </div>
                     
                     <div id="transcriptionSuccess" style="display: none;">
                         <div class="transcription-result">
-                            <label class="form-label">转录结果</label>
+                            <label class="form-label">轉錄結果</label>
                             <textarea class="form-textarea" id="transcriptionText" 
-                                      placeholder="转录结果将在这里显示..." readonly></textarea>
+                                      placeholder="轉錄結果將在這裡顯示..." readonly></textarea>
                             <div class="result-actions">
                                 <button type="button" class="btn-secondary" id="copyTranscriptionBtn">
                                     <span>📋</span>
-                                    <span>复制文本</span>
+                                    <span>複製文字</span>
                                 </button>
                                 <button type="button" class="btn-secondary" id="editTranscriptionBtn">
                                     <span>✏️</span>
-                                    <span>编辑文本</span>
+                                    <span>編輯文字</span>
                                 </button>
                                 <button type="button" class="btn-secondary" id="useForTtsBtn">
                                     <span>🎙️</span>
-                                    <span>转为语音</span>
+                                    <span>轉為語音</span>
                                 </button>
                             </div>
                         </div>
@@ -1233,28 +1239,6 @@ const HTML_PAGE = `
             </div>
         </div>
         
-        <!-- 公众号推广组件 -->
-        <div class="wechat-promotion" id="wechatPromotion" style="display: none;">
-            <div class="promotion-header">
-                <h2 class="promotion-title">🎉 生成成功！喜欢这个工具吗？</h2>
-                <p class="promotion-subtitle">关注我们获取更多AI工具和技术分享</p>
-            </div>
-            <div class="promotion-content">
-                <div class="qr-code">
-                    <img src="https://img.996007.icu/file/img1/a48c4eac2f2a99909da5611c3885726.jpg" alt="微信公众号二维码" />
-                </div>
-                <div class="promotion-info">
-                    <h3>关注「一只会飞的旺旺」公众号</h3>
-                    <p>获取更多实用的AI工具、技术教程和独家资源分享</p>
-                    <ul class="benefits-list">
-                        <li>最新AI工具推荐和使用教程</li>
-                        <li>前沿技术解析和实战案例</li>
-                        <li>独家资源和工具源码分享</li>
-                        <li>技术问题答疑和交流社群</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -1263,9 +1247,9 @@ const HTML_PAGE = `
         let currentMode = 'tts'; // 'tts' or 'transcription'
         let selectedAudioFile = null;
         let transcriptionToken = null;
-        let currentLanguage = 'en'; // 默认语言
+        let currentLanguage = 'en'; // 預設語言
 
-        // 国际化翻译数据
+        // 國際化翻譯資料
         const translations = {
             en: {
                 'page.title': 'VoiceCraft - AI-Powered Voice Processing Platform',
@@ -1290,9 +1274,9 @@ const HTML_PAGE = `
                 'mode.transcription': 'Speech to Text'
             },
             zh: {
-                'page.title': 'VoiceCraft - AI驱动的语音处理平台',
-                'page.description': 'VoiceCraft是一个AI驱动的平台，支持文字转语音和语音转文字，拥有20+种语音选项，闪电般的处理速度，完全免费使用。',
-                'page.keywords': '文字转语音,AI语音合成,在线TTS,语音生成器,免费语音工具,语音转文字,语音转录',
+                'page.title': 'VoiceCraft - AI驅動的語音處理平臺',
+                'page.description': 'VoiceCraft是一個AI驅動的平臺，支援文字轉語音和語音轉文字，擁有20+種語音選項，閃電般的處理速度，完全免費使用。',
+                'page.keywords': '文字轉語音,AI語音合成,線上TTS,語音生成器,免費語音工具,語音轉文字,語音轉錄',
                 'lang.current': '中文',
                 'lang.en': 'English',
                 'lang.zh': '中文',
@@ -1303,18 +1287,18 @@ const HTML_PAGE = `
                 'lang.de': 'Deutsch',
                 'lang.ru': 'Русский',
                 'header.title': 'VoiceCraft',
-                'header.subtitle': 'AI驱动的语音处理平台',
-                'header.feature1': '20+种语音选项',
-                'header.feature2': '闪电般快速',
-                'header.feature3': '完全免费',
-                'header.feature4': '支持下载',
-                'mode.tts': '文字转语音',
-                'mode.transcription': '语音转文字'
+                'header.subtitle': 'AI驅動的語音處理平臺',
+                'header.feature1': '20+種語音選項',
+                'header.feature2': '閃電般快速',
+                'header.feature3': '完全免費',
+                'header.feature4': '支援下載',
+                'mode.tts': '文字轉語音',
+                'mode.transcription': '語音轉文字'
             },
             ja: {
-                'page.title': 'VoiceCraft - AI音声処理プラットフォーム',
-                'page.description': 'VoiceCraftはAI駆動のプラットフォームで、テキスト読み上げと音声テキスト変換に対応。20以上の音声オプション、高速処理、完全無料でご利用いただけます。',
-                'page.keywords': 'テキスト読み上げ,AI音声合成,オンラインTTS,音声ジェネレーター,無料音声ツール,音声テキスト変換,音声転写',
+                'page.title': 'VoiceCraft - AI音聲処理プラットフォーム',
+                'page.description': 'VoiceCraftはAI駆動のプラットフォームで、テキスト読み上げと音聲テキスト変換に対応。20以上の音聲オプション、高速処理、完全無料でご利用いただけます。',
+                'page.keywords': 'テキスト読み上げ,AI音聲合成,オンラインTTS,音聲ジェネレーター,無料音聲ツール,音聲テキスト変換,音聲転寫',
                 'lang.current': '日本語',
                 'lang.en': 'English',
                 'lang.zh': '中文',
@@ -1325,13 +1309,13 @@ const HTML_PAGE = `
                 'lang.de': 'Deutsch',
                 'lang.ru': 'Русский',
                 'header.title': 'VoiceCraft',
-                'header.subtitle': 'AI音声処理プラットフォーム',
-                'header.feature1': '20以上の音声オプション',
+                'header.subtitle': 'AI音聲処理プラットフォーム',
+                'header.feature1': '20以上の音聲オプション',
                 'header.feature2': '高速処理',
                 'header.feature3': '完全無料',
                 'header.feature4': 'ダウンロード対応',
                 'mode.tts': 'テキスト読み上げ',
-                'mode.transcription': '音声テキスト変換'
+                'mode.transcription': '音聲テキスト変換'
             },
             ko: {
                 'page.title': 'VoiceCraft - AI 음성 처리 플랫폼',
@@ -1445,18 +1429,18 @@ const HTML_PAGE = `
             }
         };
 
-        // 国际化功能
+        // 國際化功能
         function detectLanguage() {
-            // 检测浏览器语言
+            // 檢測瀏覽器語言
             const browserLang = navigator.language || navigator.userLanguage;
             const shortLang = browserLang.split('-')[0];
             
-            // 检查是否支持该语言
+            // 檢查是否支援該語言
             if (translations[shortLang]) {
                 return shortLang;
             }
             
-            // 默认返回英语
+            // 預設返回英語
             return 'en';
         }
 
@@ -1464,20 +1448,20 @@ const HTML_PAGE = `
             currentLanguage = lang;
             localStorage.setItem('voicecraft-language', lang);
             
-            // 更新页面语言属性
+            // 更新頁面語言屬性
             document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
             
-            // 应用翻译
+            // 應用翻譯
             applyTranslations();
             
-            // 更新语言切换器
+            // 更新語言切換器
             updateLanguageSwitcher();
         }
 
         function applyTranslations() {
             const langData = translations[currentLanguage];
             
-            // 更新所有带有 data-i18n 属性的元素
+            // 更新所有帶有 data-i18n 屬性的元素
             document.querySelectorAll('[data-i18n]').forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (langData[key]) {
@@ -1485,7 +1469,7 @@ const HTML_PAGE = `
                 }
             });
             
-            // 更新 meta 标签
+            // 更新 meta 標籤
             document.querySelectorAll('[data-i18n-content]').forEach(element => {
                 const key = element.getAttribute('data-i18n-content');
                 if (langData[key]) {
@@ -1493,7 +1477,7 @@ const HTML_PAGE = `
                 }
             });
             
-            // 更新页面标题
+            // 更新頁面標題
             if (langData['page.title']) {
                 document.title = langData['page.title'];
             }
@@ -1502,7 +1486,7 @@ const HTML_PAGE = `
         function updateLanguageSwitcher() {
             const langFlags = {
                 'en': '🇺🇸',
-                'zh': '🇨🇳',
+                'zh': '🇭🇰',
                 'ja': '🇯🇵',
                 'ko': '🇰🇷',
                 'es': '🇪🇸',
@@ -1515,7 +1499,7 @@ const HTML_PAGE = `
             document.getElementById('currentLangFlag').textContent = langFlags[currentLanguage];
             document.getElementById('currentLangName').textContent = langData['lang.current'];
             
-            // 更新选中状态
+            // 更新選中狀態
             document.querySelectorAll('.language-option').forEach(option => {
                 option.classList.remove('active');
                 if (option.getAttribute('data-lang') === currentLanguage) {
@@ -1524,9 +1508,9 @@ const HTML_PAGE = `
             });
         }
 
-        // 初始化页面
+        // 初始化頁面
         document.addEventListener('DOMContentLoaded', function() {
-            // 初始化国际化
+            // 初始化國際化
             initializeI18n();
             
             // 初始化其他功能
@@ -1538,7 +1522,7 @@ const HTML_PAGE = `
             initializeLanguageSwitcher();
         });
 
-        // 初始化输入方式切换
+        // 初始化輸入方式切換
         function initializeInputMethodTabs() {
             const textInputTab = document.getElementById('textInputTab');
             const fileUploadTab = document.getElementById('fileUploadTab');
@@ -1564,19 +1548,19 @@ const HTML_PAGE = `
             });
         }
 
-        // 初始化文件上传功能
+        // 初始化檔案上傳功能
         function initializeFileUpload() {
             const fileDropZone = document.getElementById('fileDropZone');
             const fileInput = document.getElementById('fileInput');
             const fileInfo = document.getElementById('fileInfo');
             const fileRemoveBtn = document.getElementById('fileRemoveBtn');
 
-            // 点击上传区域
+            // 點選上傳區域
             fileDropZone.addEventListener('click', function() {
                 fileInput.click();
             });
 
-            // 文件选择
+            // 檔案選擇
             fileInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -1604,7 +1588,7 @@ const HTML_PAGE = `
                 }
             });
 
-            // 移除文件
+            // 移除檔案
             fileRemoveBtn.addEventListener('click', function() {
                 selectedFile = null;
                 fileInput.value = '';
@@ -1613,30 +1597,30 @@ const HTML_PAGE = `
             });
         }
 
-        // 处理文件选择
+        // 處理檔案選擇
         function handleFileSelect(file) {
-            // 验证文件类型
+            // 驗證檔案型別
             if (!file.type.includes('text/') && !file.name.toLowerCase().endsWith('.txt')) {
-                alert('请选择txt格式的文本文件');
+                alert('請選擇txt格式的文字檔案');
                 return;
             }
 
-            // 验证文件大小
+            // 驗證檔案大小
             if (file.size > 500 * 1024) {
-                alert('文件大小不能超过500KB');
+                alert('檔案大小不能超過500KB');
                 return;
             }
 
             selectedFile = file;
             
-            // 显示文件信息
+            // 顯示檔案資訊
             document.getElementById('fileName').textContent = file.name;
             document.getElementById('fileSize').textContent = formatFileSize(file.size);
             document.getElementById('fileInfo').style.display = 'flex';
             document.getElementById('fileDropZone').style.display = 'none';
         }
 
-        // 格式化文件大小
+        // 格式化檔案大小
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
             const k = 1024;
@@ -1645,7 +1629,7 @@ const HTML_PAGE = `
             return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
         }
 
-        // 表单提交处理
+        // 表單提交處理
         document.getElementById('ttsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1660,21 +1644,21 @@ const HTML_PAGE = `
             const success = document.getElementById('success');
             const error = document.getElementById('error');
             
-            // 验证输入
+            // 驗證輸入
             if (currentInputMethod === 'text') {
                 const text = document.getElementById('text').value;
                 if (!text.trim()) {
-                    alert('请输入要转换的文本内容');
+                    alert('請輸入要轉換的文字內容');
                     return;
                 }
             } else if (currentInputMethod === 'file') {
                 if (!selectedFile) {
-                    alert('请选择要上传的txt文件');
+                    alert('請選擇要上傳的txt檔案');
                     return;
                 }
             }
             
-            // 重置状态
+            // 重置狀態
             resultContainer.style.display = 'block';
             loading.style.display = 'block';
             success.style.display = 'none';
@@ -1686,22 +1670,22 @@ const HTML_PAGE = `
                 let response;
                 let textLength = 0;
                 
-                // 更新加载提示
+                // 更新載入提示
                 const loadingText = document.getElementById('loadingText');
                 const progressInfo = document.getElementById('progressInfo');
                 
                 if (currentInputMethod === 'text') {
-                    // 手动输入文本
+                    // 手動輸入文字
                     const text = document.getElementById('text').value;
                     textLength = text.length;
                     
-                    // 根据文本长度显示不同的提示
+                    // 根據文字長度顯示不同的提示
                     if (textLength > 3000) {
-                        loadingText.textContent = '正在处理长文本，请耐心等待...';
-                        progressInfo.textContent = '文本长度: ' + textLength + ' 字符，预计需要 ' + (Math.ceil(textLength / 1500) * 2) + ' 秒';
+                        loadingText.textContent = '正在處理長文字，請耐心等待...';
+                        progressInfo.textContent = '文字長度: ' + textLength + ' 字元，預計需要 ' + (Math.ceil(textLength / 1500) * 2) + ' 秒';
                     } else {
-                        loadingText.textContent = '正在生成语音，请稍候...';
-                        progressInfo.textContent = '文本长度: ' + textLength + ' 字符';
+                        loadingText.textContent = '正在生成語音，請稍候...';
+                        progressInfo.textContent = '文字長度: ' + textLength + ' 字元';
                     }
                     
                     response = await fetch('/v1/audio/speech', {
@@ -1718,9 +1702,9 @@ const HTML_PAGE = `
                         })
                     });
                 } else {
-                    // 文件上传
-                    loadingText.textContent = '正在处理上传的文件...';
-                    progressInfo.textContent = '文件: ' + selectedFile.name + ' (' + formatFileSize(selectedFile.size) + ')';
+                    // 檔案上傳
+                    loadingText.textContent = '正在處理上傳的檔案...';
+                    progressInfo.textContent = '檔案: ' + selectedFile.name + ' (' + formatFileSize(selectedFile.size) + ')';
                     
                     const formData = new FormData();
                     formData.append('file', selectedFile);
@@ -1737,13 +1721,13 @@ const HTML_PAGE = `
                 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error?.message || '生成失败');
+                    throw new Error(errorData.error?.message || '生成失敗');
                 }
                 
                 const audioBlob = await response.blob();
                 const audioUrl = URL.createObjectURL(audioBlob);
                 
-                // 显示音频播放器
+                // 顯示音訊播放器
                 const audioPlayer = document.getElementById('audioPlayer');
                 const downloadBtn = document.getElementById('downloadBtn');
                 
@@ -1753,7 +1737,7 @@ const HTML_PAGE = `
                 loading.style.display = 'none';
                 success.style.display = 'block';
                 
-                // 显示公众号推广组件
+                // 顯示公眾號推廣元件
                 setTimeout(() => {
                     const wechatPromotion = document.getElementById('wechatPromotion');
                     wechatPromotion.style.display = 'block';
@@ -1764,23 +1748,23 @@ const HTML_PAGE = `
                 loading.style.display = 'none';
                 error.style.display = 'block';
                 
-                // 根据错误类型显示不同的提示
+                // 根據錯誤型別顯示不同的提示
                 if (err.message.includes('Too many subrequests')) {
-                    error.textContent = '错误: 文本过长导致请求过多，请缩短文本内容或分段处理';
-                } else if (err.message.includes('频率限制') || err.message.includes('429')) {
-                    error.textContent = '错误: 请求过于频繁，请稍后再试';
-                } else if (err.message.includes('分块数量') && err.message.includes('超过限制')) {
-                    error.textContent = '错误: ' + err.message;
+                    error.textContent = '錯誤: 文字過長導致請求過多，請縮短文字內容或分段處理';
+                } else if (err.message.includes('頻率限制') || err.message.includes('429')) {
+                    error.textContent = '錯誤: 請求過於頻繁，請稍後再試';
+                } else if (err.message.includes('分塊數量') && err.message.includes('超過限制')) {
+                    error.textContent = '錯誤: ' + err.message;
                 } else {
-                    error.textContent = '错误: ' + err.message;
+                    error.textContent = '錯誤: ' + err.message;
                 }
             } finally {
                 generateBtn.disabled = false;
-                generateBtn.innerHTML = '<span>🎙️</span><span>开始生成语音</span>';
+                generateBtn.innerHTML = '<span>🎙️</span><span>開始生成語音</span>';
             }
         });
 
-        // 初始化模式切换器
+        // 初始化模式切換器
         function initializeModeSwitcher() {
             const ttsMode = document.getElementById('ttsMode');
             const transcriptionMode = document.getElementById('transcriptionMode');
@@ -1796,7 +1780,7 @@ const HTML_PAGE = `
             });
         }
 
-        // 切换功能模式
+        // 切換功能模式
         function switchMode(mode) {
             const ttsMode = document.getElementById('ttsMode');
             const transcriptionMode = document.getElementById('transcriptionMode');
@@ -1807,36 +1791,36 @@ const HTML_PAGE = `
             currentMode = mode;
 
             if (mode === 'tts') {
-                // 切换到TTS模式
+                // 切換到TTS模式
                 ttsMode.classList.add('active');
                 transcriptionMode.classList.remove('active');
                 mainContent.style.display = 'block';
                 transcriptionContainer.style.display = 'none';
             } else {
-                // 切换到语音转录模式
+                // 切換到語音轉錄模式
                 transcriptionMode.classList.add('active');
                 ttsMode.classList.remove('active');
                 mainContent.style.display = 'none';
                 transcriptionContainer.style.display = 'block';
             }
 
-            // 隐藏推广组件
+            // 隱藏推廣元件
             wechatPromotion.style.display = 'none';
         }
 
-        // 初始化音频上传功能
+        // 初始化音訊上傳功能
         function initializeAudioUpload() {
             const audioDropZone = document.getElementById('audioDropZone');
             const audioFileInput = document.getElementById('audioFileInput');
             const audioFileInfo = document.getElementById('audioFileInfo');
             const audioFileRemoveBtn = document.getElementById('audioFileRemoveBtn');
 
-            // 点击上传区域
+            // 點選上傳區域
             audioDropZone.addEventListener('click', function() {
                 audioFileInput.click();
             });
 
-            // 文件选择
+            // 檔案選擇
             audioFileInput.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -1864,7 +1848,7 @@ const HTML_PAGE = `
                 }
             });
 
-            // 移除文件
+            // 移除檔案
             audioFileRemoveBtn.addEventListener('click', function() {
                 selectedAudioFile = null;
                 audioFileInput.value = '';
@@ -1873,9 +1857,9 @@ const HTML_PAGE = `
             });
         }
 
-        // 处理音频文件选择
+        // 處理音訊檔案選擇
         function handleAudioFileSelect(file) {
-            // 验证文件类型
+            // 驗證檔案型別
             const allowedTypes = [
                 'audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/m4a', 'audio/flac', 'audio/aac',
                 'audio/ogg', 'audio/webm', 'audio/amr', 'audio/3gpp'
@@ -1887,19 +1871,19 @@ const HTML_PAGE = `
             );
 
             if (!isValidType) {
-                alert('请选择音频格式的文件（mp3、wav、m4a、flac、aac、ogg、webm、amr、3gp）');
+                alert('請選擇音訊格式的檔案（mp3、wav、m4a、flac、aac、ogg、webm、amr、3gp）');
                 return;
             }
 
-            // 验证文件大小（限制为10MB）
+            // 驗證檔案大小（限制為10MB）
             if (file.size > 10 * 1024 * 1024) {
-                alert('音频文件大小不能超过10MB');
+                alert('音訊檔案大小不能超過10MB');
                 return;
             }
 
             selectedAudioFile = file;
             
-            // 显示文件信息
+            // 顯示檔案資訊
             document.getElementById('audioFileName').textContent = file.name;
             document.getElementById('audioFileSize').textContent = formatFileSize(file.size);
             document.getElementById('audioFileInfo').style.display = 'flex';
@@ -1925,7 +1909,7 @@ const HTML_PAGE = `
             });
         }
 
-        // 处理语音转录表单提交
+        // 處理語音轉錄表單提交
         document.getElementById('transcriptionForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -1935,37 +1919,37 @@ const HTML_PAGE = `
             const transcriptionSuccess = document.getElementById('transcriptionSuccess');
             const transcriptionError = document.getElementById('transcriptionError');
             
-            // 验证音频文件
+            // 驗證音訊檔案
             if (!selectedAudioFile) {
-                alert('请选择要转录的音频文件');
+                alert('請選擇要轉錄的音訊檔案');
                 return;
             }
             
-            // 获取Token配置
+            // 獲取Token配置
             const tokenOption = document.querySelector('input[name="tokenOption"]:checked').value;
             const customToken = document.getElementById('tokenInput').value;
             
             if (tokenOption === 'custom' && !customToken.trim()) {
-                alert('请输入自定义Token');
+                alert('請輸入自定義Token');
                 return;
             }
             
-            // 重置状态
+            // 重置狀態
             transcriptionResult.style.display = 'block';
             transcriptionLoading.style.display = 'block';
             transcriptionSuccess.style.display = 'none';
             transcriptionError.style.display = 'none';
             transcribeBtn.disabled = true;
-            transcribeBtn.textContent = '转录中...';
+            transcribeBtn.textContent = '轉錄中...';
             
-            // 更新加载提示
+            // 更新載入提示
             const loadingText = document.getElementById('transcriptionLoadingText');
             const progressInfo = document.getElementById('transcriptionProgressInfo');
-            loadingText.textContent = '正在转录音频，请稍候...';
-            progressInfo.textContent = '文件: ' + selectedAudioFile.name + ' (' + formatFileSize(selectedAudioFile.size) + ')';
+            loadingText.textContent = '正在轉錄音訊，請稍候...';
+            progressInfo.textContent = '檔案: ' + selectedAudioFile.name + ' (' + formatFileSize(selectedAudioFile.size) + ')';
             
             try {
-                // 构建FormData
+                // 構建FormData
                 const formData = new FormData();
                 formData.append('file', selectedAudioFile);
                 
@@ -1980,48 +1964,42 @@ const HTML_PAGE = `
                 
                 if (!response.ok) {
                     const errorData = await response.json();
-                    throw new Error(errorData.error?.message || '转录失败');
+                    throw new Error(errorData.error?.message || '轉錄失敗');
                 }
                 
                 const result = await response.json();
                 
-                // 显示转录结果
+                // 顯示轉錄結果
                 document.getElementById('transcriptionText').value = result.text || '';
                 transcriptionLoading.style.display = 'none';
                 transcriptionSuccess.style.display = 'block';
                 
-                // 显示公众号推广组件
-                setTimeout(() => {
-                    const wechatPromotion = document.getElementById('wechatPromotion');
-                    wechatPromotion.style.display = 'block';
-                    wechatPromotion.classList.add('fade-in');
-                }, 1000);
                 
             } catch (err) {
                 transcriptionLoading.style.display = 'none';
                 transcriptionError.style.display = 'block';
-                transcriptionError.textContent = '错误: ' + err.message;
+                transcriptionError.textContent = '錯誤: ' + err.message;
             } finally {
                 transcribeBtn.disabled = false;
-                transcribeBtn.innerHTML = '<span>🎧</span><span>开始语音转录</span>';
+                transcribeBtn.innerHTML = '<span>🎧</span><span>開始語音轉錄</span>';
             }
         });
 
-        // 复制转录结果
+        // 複製轉錄結果
         document.getElementById('copyTranscriptionBtn').addEventListener('click', function() {
             const transcriptionText = document.getElementById('transcriptionText');
             transcriptionText.select();
             document.execCommand('copy');
             
-            // 临时改变按钮文本
+            // 臨時改變按鈕文字
             const originalText = this.innerHTML;
-            this.innerHTML = '<span>✅</span><span>已复制</span>';
+            this.innerHTML = '<span>✅</span><span>已複製</span>';
             setTimeout(() => {
                 this.innerHTML = originalText;
             }, 2000);
         });
 
-        // 编辑转录结果
+        // 編輯轉錄結果
         document.getElementById('editTranscriptionBtn').addEventListener('click', function() {
             const transcriptionText = document.getElementById('transcriptionText');
             const isReadonly = transcriptionText.readOnly;
@@ -2029,65 +2007,65 @@ const HTML_PAGE = `
             if (isReadonly) {
                 transcriptionText.readOnly = false;
                 transcriptionText.focus();
-                this.innerHTML = '<span>💾</span><span>保存编辑</span>';
+                this.innerHTML = '<span>💾</span><span>儲存編輯</span>';
             } else {
                 transcriptionText.readOnly = true;
-                this.innerHTML = '<span>✏️</span><span>编辑文本</span>';
+                this.innerHTML = '<span>✏️</span><span>編輯文字</span>';
             }
         });
 
-        // 转为语音功能
+        // 轉為語音功能
         document.getElementById('useForTtsBtn').addEventListener('click', function() {
             const transcriptionText = document.getElementById('transcriptionText').value;
             
             if (!transcriptionText.trim()) {
-                alert('转录结果为空，无法转换为语音');
+                alert('轉錄結果為空，無法轉換為語音');
                 return;
             }
             
-            // 切换到TTS模式
+            // 切換到TTS模式
             switchMode('tts');
             
-            // 将转录文本填入TTS文本框
+            // 將轉錄文字填入TTS文字框
             document.getElementById('text').value = transcriptionText;
             
-            // 滚动到TTS区域
+            // 滾動到TTS區域
             document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // 初始化国际化
+        // 初始化國際化
         function initializeI18n() {
-            // 检查本地存储中的语言设置
+            // 檢查本地儲存中的語言設定
             const savedLang = localStorage.getItem('voicecraft-language');
             
             if (savedLang && translations[savedLang]) {
                 currentLanguage = savedLang;
             } else {
-                // 自动检测浏览器语言
+                // 自動檢測瀏覽器語言
                 currentLanguage = detectLanguage();
             }
             
-            // 应用语言设置
+            // 應用語言設定
             setLanguage(currentLanguage);
         }
 
-        // 初始化语言切换器
+        // 初始化語言切換器
         function initializeLanguageSwitcher() {
             const languageBtn = document.getElementById('languageBtn');
             const languageDropdown = document.getElementById('languageDropdown');
 
-            // 切换下拉菜单显示/隐藏
+            // 切換下拉選單顯示/隱藏
             languageBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 languageDropdown.classList.toggle('show');
             });
 
-            // 点击页面其他地方时隐藏下拉菜单
+            // 點選頁面其他地方時隱藏下拉選單
             document.addEventListener('click', function() {
                 languageDropdown.classList.remove('show');
             });
 
-            // 语言选择
+            // 語言選擇
             document.querySelectorAll('.language-option').forEach(option => {
                 option.addEventListener('click', function() {
                     const selectedLang = this.getAttribute('data-lang');
@@ -2118,7 +2096,7 @@ async function handleRequest(request) {
     const requestUrl = new URL(request.url);
     const path = requestUrl.pathname;
 
-    // 返回前端页面
+    // 返回前端頁面
     if (path === "/" || path === "/index.html") {
         return new Response(HTML_PAGE, {
             headers: {
@@ -2154,16 +2132,16 @@ async function handleRequest(request) {
         try {
             const contentType = request.headers.get("content-type") || "";
             
-            // 处理文件上传
+            // 處理檔案上傳
             if (contentType.includes("multipart/form-data")) {
                 return await handleFileUpload(request);
             }
             
-            // 处理JSON请求（原有功能）
+            // 處理JSON請求（原有功能）
             const requestBody = await request.json();
             const {
                 input,
-                voice = "zh-CN-XiaoxiaoNeural",
+                voice = "zh-HK-HiuMaanNeural",
                 speed = '1.0',
                 volume = '0',
                 pitch = '0',
@@ -2204,7 +2182,7 @@ async function handleRequest(request) {
         }
     }
 
-    // 默认返回 404
+    // 預設返回 404
     return new Response("Not Found", { status: 404 });
 }
 
@@ -2219,12 +2197,12 @@ async function handleOptions(request) {
     });
 }
 
-// 添加延迟函数
+// 新增延遲函式
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// 优化文本分块函数
+// 最佳化文字分塊函式
 function optimizedTextSplit(text, maxChunkSize = 1500) {
     const chunks = [];
     const sentences = text.split(/[。！？\n]/);
@@ -2234,30 +2212,30 @@ function optimizedTextSplit(text, maxChunkSize = 1500) {
         const trimmedSentence = sentence.trim();
         if (!trimmedSentence) continue;
         
-        // 如果单个句子就超过最大长度，按字符分割
+        // 如果單個句子就超過最大長度，按字元分割
         if (trimmedSentence.length > maxChunkSize) {
             if (currentChunk) {
                 chunks.push(currentChunk.trim());
                 currentChunk = '';
             }
             
-            // 按字符分割长句子
+            // 按字元分割長句子
             for (let i = 0; i < trimmedSentence.length; i += maxChunkSize) {
                 chunks.push(trimmedSentence.slice(i, i + maxChunkSize));
             }
         } else if ((currentChunk + trimmedSentence).length > maxChunkSize) {
-            // 当前块加上新句子会超过限制，先保存当前块
+            // 當前塊加上新句子會超過限制，先儲存當前塊
             if (currentChunk) {
                 chunks.push(currentChunk.trim());
             }
             currentChunk = trimmedSentence;
         } else {
-            // 添加到当前块
+            // 新增到當前塊
             currentChunk += (currentChunk ? '。' : '') + trimmedSentence;
         }
     }
     
-    // 添加最后一个块
+    // 新增最後一個塊
     if (currentChunk.trim()) {
         chunks.push(currentChunk.trim());
     }
@@ -2265,7 +2243,7 @@ function optimizedTextSplit(text, maxChunkSize = 1500) {
     return chunks.filter(chunk => chunk.length > 0);
 }
 
-// 批量处理音频块
+// 批次處理音訊塊
 async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume, style, outputFormat, batchSize = 3, delayMs = 1000) {
     const audioChunks = [];
     
@@ -2273,13 +2251,13 @@ async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume,
         const batch = chunks.slice(i, i + batchSize);
         const batchPromises = batch.map(async (chunk, index) => {
             try {
-                // 为每个请求添加小延迟，避免同时发送
+                // 為每個請求新增小延遲，避免同時傳送
                 if (index > 0) {
                     await delay(index * 200);
                 }
                 return await getAudioChunk(chunk, voiceName, rate, pitch, volume, style, outputFormat);
             } catch (error) {
-                console.error(`处理音频块失败 (批次 ${Math.floor(i/batchSize) + 1}, 块 ${index + 1}):`, error);
+                console.error(`處理音訊塊失敗 (批次 ${Math.floor(i/batchSize) + 1}, 塊 ${index + 1}):`, error);
                 throw error;
             }
         });
@@ -2288,12 +2266,12 @@ async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume,
             const batchResults = await Promise.all(batchPromises);
             audioChunks.push(...batchResults);
             
-            // 批次间延迟
+            // 批次間延遲
             if (i + batchSize < chunks.length) {
                 await delay(delayMs);
             }
         } catch (error) {
-            console.error(`批次处理失败:`, error);
+            console.error(`批次處理失敗:`, error);
             throw error;
         }
     }
@@ -2301,15 +2279,15 @@ async function processBatchedAudioChunks(chunks, voiceName, rate, pitch, volume,
     return audioChunks;
 }
 
-async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', pitch = '+0Hz', volume = '+0%', style = "general", outputFormat = "audio-24khz-48kbitrate-mono-mp3") {
+async function getVoice(text, voiceName = "zh-HK-HiuMaanNeural", rate = '+0%', pitch = '+0Hz', volume = '+0%', style = "general", outputFormat = "audio-24khz-48kbitrate-mono-mp3") {
     try {
-        // 文本预处理
+        // 文字預處理
         const cleanText = text.trim();
         if (!cleanText) {
-            throw new Error("文本内容为空");
+            throw new Error("文字內容為空");
         }
         
-        // 如果文本很短，直接处理
+        // 如果文字很短，直接處理
         if (cleanText.length <= 1500) {
             const audioBlob = await getAudioChunk(cleanText, voiceName, rate, pitch, volume, style, outputFormat);
             return new Response(audioBlob, {
@@ -2320,17 +2298,17 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', 
             });
         }
 
-        // 优化的文本分块
+        // 最佳化的文字分塊
         const chunks = optimizedTextSplit(cleanText, 1500);
         
-        // 检查分块数量，防止超过CloudFlare限制
+        // 檢查分塊數量，防止超過CloudFlare限制
         if (chunks.length > 40) {
-            throw new Error(`文本过长，分块数量(${chunks.length})超过限制。请缩短文本或分批处理。`);
+            throw new Error(`文字過長，分塊數量(${chunks.length})超過限制。請縮短文字或分批處理。`);
         }
         
-        console.log(`文本已分为 ${chunks.length} 个块进行处理`);
+        console.log(`文字已分為 ${chunks.length} 個塊進行處理`);
 
-        // 批量处理音频块，控制并发数量和频率
+        // 批次處理音訊塊，控制併發數量和頻率
         const audioChunks = await processBatchedAudioChunks(
             chunks, 
             voiceName, 
@@ -2339,11 +2317,11 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', 
             volume, 
             style, 
             outputFormat,
-            3,  // 每批处理3个
-            800 // 批次间延迟800ms
+            3,  // 每批處理3個
+            800 // 批次間延遲800ms
         );
 
-        // 将音频片段拼接起来
+        // 將音訊片段拼接起來
         const concatenatedAudio = new Blob(audioChunks, { type: 'audio/mpeg' });
         return new Response(concatenatedAudio, {
             headers: {
@@ -2353,7 +2331,7 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', 
         });
 
     } catch (error) {
-        console.error("语音合成失败:", error);
+        console.error("語音合成失敗:", error);
         return new Response(JSON.stringify({
             error: {
                 message: error.message || String(error),
@@ -2373,16 +2351,16 @@ async function getVoice(text, voiceName = "zh-CN-XiaoxiaoNeural", rate = '+0%', 
 
 
 
-//获取单个音频数据（增强错误处理和重试机制）
+//獲取單個音訊資料（增強錯誤處理和重試機制）
 async function getAudioChunk(text, voiceName, rate, pitch, volume, style, outputFormat = 'audio-24khz-48kbitrate-mono-mp3', maxRetries = 3) {
-    const retryDelay = 500; // 重试延迟500ms
+    const retryDelay = 500; // 重試延遲500ms
     
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
         try {
             const endpoint = await getEndpoint();
             const url = `https://${endpoint.r}.tts.speech.microsoft.com/cognitiveservices/v1`;
             
-            // 处理文本中的延迟标记
+            // 處理文字中的延遲標記
             let m = text.match(/\[(\d+)\]\s*?$/);
             let slien = 0;
             if (m && m.length == 2) {
@@ -2390,13 +2368,13 @@ async function getAudioChunk(text, voiceName, rate, pitch, volume, style, output
                 text = text.replace(m[0], '');
             }
             
-            // 验证文本长度
+            // 驗證文字長度
             if (!text.trim()) {
-                throw new Error("文本块为空");
+                throw new Error("文字塊為空");
             }
             
             if (text.length > 2000) {
-                throw new Error(`文本块过长: ${text.length} 字符，最大支持2000字符`);
+                throw new Error(`文字塊過長: ${text.length} 字元，最大支援2000字元`);
             }
             
             const response = await fetch(url, {
@@ -2413,26 +2391,26 @@ async function getAudioChunk(text, voiceName, rate, pitch, volume, style, output
             if (!response.ok) {
                 const errorText = await response.text();
                 
-                // 根据错误类型决定是否重试
+                // 根據錯誤型別決定是否重試
                 if (response.status === 429) {
-                    // 频率限制，需要重试
+                    // 頻率限制，需要重試
                     if (attempt < maxRetries) {
-                        console.log(`频率限制，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                        console.log(`頻率限制，第${attempt + 1}次重試，等待${retryDelay * (attempt + 1)}ms`);
                         await delay(retryDelay * (attempt + 1));
                         continue;
                     }
-                    throw new Error(`请求频率过高，已重试${maxRetries}次仍失败`);
+                    throw new Error(`請求頻率過高，已重試${maxRetries}次仍失敗`);
                 } else if (response.status >= 500) {
-                    // 服务器错误，可以重试
+                    // 伺服器錯誤，可以重試
                     if (attempt < maxRetries) {
-                        console.log(`服务器错误，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                        console.log(`伺服器錯誤，第${attempt + 1}次重試，等待${retryDelay * (attempt + 1)}ms`);
                         await delay(retryDelay * (attempt + 1));
                         continue;
                     }
-                    throw new Error(`Edge TTS服务器错误: ${response.status} ${errorText}`);
+                    throw new Error(`Edge TTS伺服器錯誤: ${response.status} ${errorText}`);
                 } else {
-                    // 客户端错误，不重试
-                    throw new Error(`Edge TTS API错误: ${response.status} ${errorText}`);
+                    // 客戶端錯誤，不重試
+                    throw new Error(`Edge TTS API錯誤: ${response.status} ${errorText}`);
                 }
             }
 
@@ -2440,42 +2418,42 @@ async function getAudioChunk(text, voiceName, rate, pitch, volume, style, output
             
         } catch (error) {
             if (attempt === maxRetries) {
-                // 最后一次重试失败
-                throw new Error(`音频生成失败（已重试${maxRetries}次）: ${error.message}`);
+                // 最後一次重試失敗
+                throw new Error(`音訊生成失敗（已重試${maxRetries}次）: ${error.message}`);
             }
             
-            // 如果是网络错误或其他可重试错误
+            // 如果是網路錯誤或其他可重試錯誤
             if (error.message.includes('fetch') || error.message.includes('network')) {
-                console.log(`网络错误，第${attempt + 1}次重试，等待${retryDelay * (attempt + 1)}ms`);
+                console.log(`網路錯誤，第${attempt + 1}次重試，等待${retryDelay * (attempt + 1)}ms`);
                 await delay(retryDelay * (attempt + 1));
                 continue;
             }
             
-            // 其他错误直接抛出
+            // 其他錯誤直接丟擲
             throw error;
         }
     }
 }
 
-// XML文本转义函数
+// XML文字轉義函式
 function escapeXmlText(text) {
     return text
-        .replace(/&/g, '&amp;')   // 必须首先处理 &
-        .replace(/</g, '&lt;')    // 处理 <
-        .replace(/>/g, '&gt;')    // 处理 >
-        .replace(/"/g, '&quot;')  // 处理 "
-        .replace(/'/g, '&apos;'); // 处理 '
+        .replace(/&/g, '&amp;')   // 必須首先處理 &
+        .replace(/</g, '&lt;')    // 處理 <
+        .replace(/>/g, '&gt;')    // 處理 >
+        .replace(/"/g, '&quot;')  // 處理 "
+        .replace(/'/g, '&apos;'); // 處理 '
 }
 
 function getSsml(text, voiceName, rate, pitch, volume, style, slien = 0) {
-    // 对文本进行XML转义
+    // 對文字進行XML轉義
     const escapedText = escapeXmlText(text);
     
     let slien_str = '';
     if (slien > 0) {
         slien_str = `<break time="${slien}ms" />`
     }
-    return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" version="1.0" xml:lang="zh-CN"> 
+    return `<speak xmlns="http://www.w3.org/2001/10/synthesis" xmlns:mstts="http://www.w3.org/2001/mstts" version="1.0" xml:lang="zh-HK"> 
                 <voice name="${voiceName}"> 
                     <mstts:express-as style="${style}"  styledegree="2.0" role="default" > 
                         <prosody rate="${rate}" pitch="${pitch}" volume="${volume}">${escapedText}</prosody> 
@@ -2493,7 +2471,7 @@ async function getEndpoint() {
         return tokenInfo.endpoint;
     }
 
-    // 获取新token
+    // 獲取新token
     const endpointUrl = "https://dev.microsofttranslator.com/apps/endpoint?api-version=1.0";
     const clientId = crypto.randomUUID().replace(/-/g, "");
 
@@ -2515,7 +2493,7 @@ async function getEndpoint() {
         });
 
         if (!response.ok) {
-            throw new Error(`获取endpoint失败: ${response.status}`);
+            throw new Error(`獲取endpoint失敗: ${response.status}`);
         }
 
         const data = await response.json();
@@ -2531,10 +2509,10 @@ async function getEndpoint() {
         return data;
 
     } catch (error) {
-        console.error("获取endpoint失败:", error);
-        // 如果有缓存的token，即使过期也尝试使用
+        console.error("獲取endpoint失敗:", error);
+        // 如果有快取的token，即使過期也嘗試使用
         if (tokenInfo.token) {
-            console.log("使用过期的缓存token");
+            console.log("使用過期的快取token");
             return tokenInfo.endpoint;
         }
         throw error;
@@ -2598,22 +2576,22 @@ function dateFormat() {
     return formattedDate.toLowerCase();
 }
 
-// 处理文件上传的函数
+// 處理檔案上傳的函式
 async function handleFileUpload(request) {
     try {
         const formData = await request.formData();
         const file = formData.get('file');
-        const voice = formData.get('voice') || 'zh-CN-XiaoxiaoNeural';
+        const voice = formData.get('voice') || 'zh-HK-HiuMaanNeural';
         const speed = formData.get('speed') || '1.0';
         const volume = formData.get('volume') || '0';
         const pitch = formData.get('pitch') || '0';
         const style = formData.get('style') || 'general';
 
-        // 验证文件
+        // 驗證檔案
         if (!file) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "未找到上传的文件",
+                    message: "未找到上傳的檔案",
                     type: "invalid_request_error",
                     param: "file",
                     code: "missing_file"
@@ -2627,11 +2605,11 @@ async function handleFileUpload(request) {
             });
         }
 
-        // 验证文件类型
+        // 驗證檔案型別
         if (!file.type.includes('text/') && !file.name.toLowerCase().endsWith('.txt')) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "不支持的文件类型，请上传txt文件",
+                    message: "不支援的檔案型別，請上傳txt檔案",
                     type: "invalid_request_error",
                     param: "file",
                     code: "invalid_file_type"
@@ -2645,11 +2623,11 @@ async function handleFileUpload(request) {
             });
         }
 
-        // 验证文件大小（限制为500KB）
+        // 驗證檔案大小（限制為500KB）
         if (file.size > 500 * 1024) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "文件大小超过限制（最大500KB）",
+                    message: "檔案大小超過限制（最大500KB）",
                     type: "invalid_request_error",
                     param: "file",
                     code: "file_too_large"
@@ -2663,14 +2641,14 @@ async function handleFileUpload(request) {
             });
         }
 
-        // 读取文件内容
+        // 讀取檔案內容
         const text = await file.text();
         
-        // 验证文本内容
+        // 驗證文字內容
         if (!text.trim()) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "文件内容为空",
+                    message: "檔案內容為空",
                     type: "invalid_request_error",
                     param: "file",
                     code: "empty_file"
@@ -2684,11 +2662,11 @@ async function handleFileUpload(request) {
             });
         }
 
-        // 文本长度限制（10000字符）
+        // 文字長度限制（10000字元）
         if (text.length > 10000) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "文本内容过长（最大10000字符）",
+                    message: "文字內容過長（最大10000字元）",
                     type: "invalid_request_error",
                     param: "file",
                     code: "text_too_long"
@@ -2702,12 +2680,12 @@ async function handleFileUpload(request) {
             });
         }
 
-        // 处理参数格式，与原有逻辑保持一致
+        // 處理引數格式，與原有邏輯保持一致
         let rate = parseInt(String((parseFloat(speed) - 1.0) * 100));
         let numVolume = parseInt(String(parseFloat(volume) * 100));
         let numPitch = parseInt(pitch);
 
-        // 调用TTS服务
+        // 呼叫TTS服務
         return await getVoice(
             text,
             voice,
@@ -2719,10 +2697,10 @@ async function handleFileUpload(request) {
         );
 
     } catch (error) {
-        console.error("文件上传处理失败:", error);
+        console.error("檔案上傳處理失敗:", error);
         return new Response(JSON.stringify({
             error: {
-                message: "文件处理失败",
+                message: "檔案處理失敗",
                 type: "api_error",
                 param: null,
                 code: "file_processing_error"
@@ -2737,14 +2715,14 @@ async function handleFileUpload(request) {
     }
 }
 
-// 处理语音转录的函数
+// 處理語音轉錄的函式
 async function handleAudioTranscription(request) {
     try {
-        // 验证请求方法
+        // 驗證請求方法
         if (request.method !== 'POST') {
             return new Response(JSON.stringify({
                 error: {
-                    message: "只支持POST方法",
+                    message: "只支援POST方法",
                     type: "invalid_request_error",
                     param: "method",
                     code: "method_not_allowed"
@@ -2760,11 +2738,11 @@ async function handleAudioTranscription(request) {
 
         const contentType = request.headers.get("content-type") || "";
         
-        // 验证Content-Type
+        // 驗證Content-Type
         if (!contentType.includes("multipart/form-data")) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "请求必须使用multipart/form-data格式",
+                    message: "請求必須使用multipart/form-data格式",
                     type: "invalid_request_error",
                     param: "content-type",
                     code: "invalid_content_type"
@@ -2783,11 +2761,11 @@ async function handleAudioTranscription(request) {
         const audioFile = formData.get('file');
         const customToken = formData.get('token');
 
-        // 验证音频文件
+        // 驗證音訊檔案
         if (!audioFile) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "未找到音频文件",
+                    message: "未找到音訊檔案",
                     type: "invalid_request_error",
                     param: "file",
                     code: "missing_file"
@@ -2801,11 +2779,11 @@ async function handleAudioTranscription(request) {
             });
         }
 
-        // 验证文件大小（限制为10MB）
+        // 驗證檔案大小（限制為10MB）
         if (audioFile.size > 10 * 1024 * 1024) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "音频文件大小不能超过10MB",
+                    message: "音訊檔案大小不能超過10MB",
                     type: "invalid_request_error",
                     param: "file",
                     code: "file_too_large"
@@ -2819,7 +2797,7 @@ async function handleAudioTranscription(request) {
             });
         }
 
-        // 验证音频文件格式
+        // 驗證音訊檔案格式
         const allowedTypes = [
             'audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/m4a', 'audio/flac', 'audio/aac',
             'audio/ogg', 'audio/webm', 'audio/amr', 'audio/3gpp'
@@ -2833,7 +2811,7 @@ async function handleAudioTranscription(request) {
         if (!isValidType) {
             return new Response(JSON.stringify({
                 error: {
-                    message: "不支持的音频文件格式，请上传mp3、wav、m4a、flac、aac、ogg、webm、amr或3gp格式的文件",
+                    message: "不支援的音訊檔案格式，請上傳mp3、wav、m4a、flac、aac、ogg、webm、amr或3gp格式的檔案",
                     type: "invalid_request_error",
                     param: "file",
                     code: "invalid_file_type"
@@ -2847,15 +2825,15 @@ async function handleAudioTranscription(request) {
             });
         }
 
-        // 使用默认token或用户提供的token
+        // 使用預設token或使用者提供的token
         const token = customToken || 'sk-wtldsvuprmwltxpbspbmawtolbacghzawnjhtlzlnujjkfhh';
 
-        // 构建发送到硅基流动API的FormData
+        // 構建傳送到矽基流動API的FormData
         const apiFormData = new FormData();
         apiFormData.append('file', audioFile);
         apiFormData.append('model', 'FunAudioLLM/SenseVoiceSmall');
 
-        // 发送请求到硅基流动API
+        // 傳送請求到矽基流動API
         const apiResponse = await fetch('https://api.siliconflow.cn/v1/audio/transcriptions', {
             method: 'POST',
             headers: {
@@ -2866,16 +2844,16 @@ async function handleAudioTranscription(request) {
 
         if (!apiResponse.ok) {
             const errorText = await apiResponse.text();
-            console.error('硅基流动API错误:', apiResponse.status, errorText);
+            console.error('矽基流動API錯誤:', apiResponse.status, errorText);
             
-            let errorMessage = '语音转录服务暂时不可用';
+            let errorMessage = '語音轉錄服務暫時不可用';
             
             if (apiResponse.status === 401) {
-                errorMessage = 'API Token无效，请检查您的配置';
+                errorMessage = 'API Token無效，請檢查您的配置';
             } else if (apiResponse.status === 429) {
-                errorMessage = '请求过于频繁，请稍后再试';
+                errorMessage = '請求過於頻繁，請稍後再試';
             } else if (apiResponse.status === 413) {
-                errorMessage = '音频文件太大，请选择较小的文件';
+                errorMessage = '音訊檔案太大，請選擇較小的檔案';
             }
 
             return new Response(JSON.stringify({
@@ -2894,10 +2872,10 @@ async function handleAudioTranscription(request) {
             });
         }
 
-        // 获取转录结果
+        // 獲取轉錄結果
         const transcriptionResult = await apiResponse.json();
 
-        // 返回转录结果
+        // 返回轉錄結果
         return new Response(JSON.stringify(transcriptionResult), {
             headers: {
                 "Content-Type": "application/json",
@@ -2906,10 +2884,10 @@ async function handleAudioTranscription(request) {
         });
 
     } catch (error) {
-        console.error("语音转录处理失败:", error);
+        console.error("語音轉錄處理失敗:", error);
         return new Response(JSON.stringify({
             error: {
-                message: "语音转录处理失败",
+                message: "語音轉錄處理失敗",
                 type: "api_error",
                 param: null,
                 code: "transcription_processing_error"
